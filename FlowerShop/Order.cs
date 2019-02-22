@@ -13,7 +13,13 @@ namespace FlowerShop
         // should apply a 20% mark-up to each flower.
         public double Price {
             get {
-                return 0;
+                double p = 0;
+                for (int i = 0; i < flowers.Count; i++)
+                    //sum up the entire cost
+                    p += flowers[i].Cost;
+                //does mark-up to grand total amount
+                p *= 1.2;
+                return p;
             }
         }
 
@@ -52,7 +58,12 @@ namespace FlowerShop
 
         public void Deliver()
         {
-            throw new NotImplementedException();
+            IClient c = this.Client;
+            //what are you supposed to do if there is no class that actually uses the IOrderDAO interface...
+            IOrderDAO dao = null;
+            
+            IOrder d = dao.GetOrder(this.Id);
+            dao.SetDelivered(d);
         }
     }
 }

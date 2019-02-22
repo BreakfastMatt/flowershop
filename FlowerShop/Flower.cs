@@ -8,7 +8,7 @@ namespace FlowerShop
     {
         public string Description { get; private set; }
 
-        public double Cost { get; private set; }
+        public double Cost { get;  set; }
 
         public int Id { get; }
 
