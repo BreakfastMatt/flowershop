@@ -1,6 +1,6 @@
 using NUnit.Framework;
+using FlowerShop;
 using NSubstitute;
-
 namespace Tests
 {
     public class Tests
@@ -14,21 +14,15 @@ namespace Tests
         public void Test1()
         {
             //Arrange
-            IClient cl = Substitute.for<IClient>();//Mock
-            IOrderDAO ord = Substitute.for<IOrderDAO>();//Mock
-            //delivered = false by default
-            IOrder o = new order(ord,cl);//Actual object, made using mock data.
+            IClient cl = Substitute.For<IClient> ();//Mock
+            IOrderDAO ord = Substitute.For<IOrderDAO>();//Mock
+            IOrder o = new Order(ord,cl);//Actual object, made using mock data.
 
             //Act
-            o.isDelivered = true;
+            o.Deliver();
 
             //Assert
-            Assert.Pass();
+            ord.Received().SetDelivered(Arg.Any<IOrder>());
         }
     }
 }
-/*
-Write a test, using mocks, to check whether the Order class’s Deliver method calls
-the SetDelivered method in IOrderDAO. Use comments in the test to specifically
-show where your ARRANGE, ACT, and ASSERT sections are. 
-*/
